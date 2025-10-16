@@ -30,11 +30,18 @@ jobs:
           # Clones to a SUB-DIRECTORY
           path: VAULT_REPO_A_CLONE_DIR 
           
-      # 3. Copy Vault files to Quartz content directory
+    # 3. Copy Vault files to Quartz content
       - name: Copy Vault files to Quartz content
         run: |
-          # The 'content/' folder now exists in the current directory, so this works!
-          rm -rf content/* cp -r VAULT_REPO_A_CLONE_DIR/* content/
+          # 🚨 CHANGE: This ensures the 'content/' folder is empty.
+          rm -rf content/* # 🚨 FIX: Copy ALL contents (including subfolders like 'Basis') from the clone 
+          # into the 'content/' folder.
+          cp -r VAULT_REPO_A_CLONE_DIR/* content/
+          
+          # 🚨 CRUCIAL CLEANUP: Remove the .obsidian folder from the content directory.
+          # The Quartz builder will often fail or behave unpredictably if it finds 
+          # the Obsidian configuration files.
+          rm -rf content/.obsidian
 
       # 4. Standard Quartz Build Steps (Now running from the root workspace)
       - name: Install Node.js
