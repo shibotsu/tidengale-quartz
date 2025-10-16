@@ -1,16 +1,10 @@
 name: Deploy Quartz Site
 
 on:
-  # 1. Manual trigger: Allows you to run the workflow manually from GitHub Actions tab
   workflow_dispatch:
-  
-  # 2. Push trigger: Runs when you push changes to the 'main' branch of Repo B (Quartz)
   push:
     branches: ["main"]
-
-  # 3. Schedule trigger: Runs periodically to check for updates in Repo A (Vault)
   schedule:
-    # Runs every six hours (at minute 0, every 6th hour)
     - cron: '0 */6 * * *' 
 
 jobs:
@@ -18,37 +12,31 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       
-      # 1. Checkout Vault (Repo A) - The critical step using your PAT
+      # 1. Checkout QUARTZ (Repo B) to the root of the workspace (needed for content/ folder)
+      - name: Checkout Quartz (Repo B)
+        uses: actions/checkout@v3
+        with:
+          # Clones the repository where the workflow is running (Repo B)
+          repository: ${{ github.repository }} 
+          # Clones to the root of the workspace (so 'content/' is available)
+          path: . 
+          
+      # 2. Checkout VAULT (Repo A) into a subfolder
       - name: Checkout Vault (Repo A)
         uses: actions/checkout@v3
         with:
           repository: GrokZGrom/Tidengale
-          # This secret holds your Classic PAT with the 'repo' scope
           token: ${{ secrets.QUARTZ_ACCESS_TO_VAULT }} 
-          # Define a temporary directory name for the vault clone
+          # Clones to a SUB-DIRECTORY
           path: VAULT_REPO_A_CLONE_DIR 
-
-      # 2. Copy Vault files to Quartz content directory
+          
+      # 3. Copy Vault files to Quartz content directory
       - name: Copy Vault files to Quartz content
         run: |
-          # Clear any existing files in the content folder
-          rm -rf content/* # Copy all files from the cloned vault folder to Quartz's content folder
-          cp -r VAULT_REPO_A_CLONE_DIR/* content/
-          # OPTIONAL: If your notes are in a subfolder like 'Notes' inside the vault:
-          # cp -r VAULT_REPO_A_CLONE_DIR/Notes/* content/
+          # The 'content/' folder now exists in the current directory, so this works!
+          rm -rf content/* cp -r VAULT_REPO_A_CLONE_DIR/* content/
 
-      # 3. Checkout Quartz (Repo B) - Clone the deployment repository
-      - name: Checkout Quartz (Repo B)
-        uses: actions/checkout@v3
-        with:
-          # Checkout the current repository for the build (Repo B)
-          repository: ${{ github.repository }} 
-          # Use the default GitHub token for this repo's build
-          token: ${{ secrets.GITHUB_TOKEN }} 
-          # Move the clone to a separate build directory to prepare for the next steps
-          path: quartz_build 
-          
-      # 4. Standard Quartz Build Steps (Assuming a typical setup)
+      # 4. Standard Quartz Build Steps (Now running from the root workspace)
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
@@ -56,15 +44,16 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-        working-directory: quartz_build
+        # Working directory is the root: /github/workspace/
 
       - name: Build Quartz
         run: npx quartz build
-        working-directory: quartz_build
+        # Working directory is the root: /github/workspace/
 
       # 5. Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: quartz_build/output
+          # Output is created in the root 'output' folder
+          publish_dir: output
