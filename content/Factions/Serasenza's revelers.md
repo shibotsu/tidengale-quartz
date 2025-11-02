@@ -1,0 +1,1 @@
+The rosenblood addicted populace of [[Serasenza]], at the service of their Hegemon, chief alchemist [[Sorriso]]. Now with their newly gained vitality, they seek to wrest control of [[Tidengale]] and claim glory for [[Serasenza]]. Believing they achieved an evolved state, the pompous revelers will preach and gloat of their grand destiny.

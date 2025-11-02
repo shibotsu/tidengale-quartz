@@ -1,0 +1,13 @@
+###  Lore
+Chikage was the Matriarch of [[Jen]], a strict traditionalist and an accomplished military leader. Despite all of this, she too, much like Valentin grew tired of the endless battles, and wished for peace and prosperity for her city. So when Valentin reached out to her with his suggestion, she was the first to stand at his side. Although the battle was brutal, it was Chikage's stratagem that granted them victory over Serasenza. Once the the three cities were united, Chikage felt cheated when Lythenlok was chosen as the seat of power, seeing as she was the greatest contributor to the unification, at the very least, in her eyes. When Valentin was murdered by Lucile, Chikage was outraged and sent her forces to rebel against Lucile's tyranny. After that incident, Chikage saw her chance to finally elevate [[Jen]] to [[Tidengale]]'s seat of power, but the proud people of Lythenlok would not allow it. That is when she sent out her agents to abduct the prince. But when Lythenlok's army was at her doorstep, that was when everything was at risk. And she could not risk her [[Jen]]. So she struck a deal with the [[The Ravener|devil]]. And ever since then, she was known as the Queen of fiends, the vile Whore Queen of [[Jen]]. She would save [[Jen]], even if it meant turning into a [[The Fiends|monster]], along her subjects.
+
+### Personality
+As the Matriarch of Jen, Chikage was raised to be a leader. She excelled as both warrior and strategist, as well as ruler, garnering her near fanatical admiration from her subjects. She was a strict adherer of Jen tradition, always honouring her promise. But clearly, her desire for dominion was more than enough to forsake her honour. After becoming a fiend, she embraced her new beastly and lecherous nature and would seize dominion over the land even in this cursed state.
+### Relationships
+#### Lucrèce
+She never bore any ill will towards the young prince, but she could not allow someone with his naivete to rule over the fate of the kingdom. She had to take things into her own hands. But when desperation gnawed at her heart, and was left with little choice, she would willingly accept her new monstrous self. It was during this time that the two would grow more intimate, albeit, much to Lucrèce's dismay.  
+#### Valentin
+She respected Valentin as a ruler, but not as an equal. In her eyes, he robbed her of her grand destiny. For she was best fit to rule this newly formed kingdom.
+#### Jenja
+
+### Quotes

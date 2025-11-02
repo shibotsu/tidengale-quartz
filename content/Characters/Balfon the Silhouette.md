@@ -1,0 +1,4 @@
+###  Lore
+Balfon is the cerebrate worshiped by [[the Midnight Church]]. He is the god night, of darkness and moonlight, and of communion. He is the protector of purity, and seeks to keep the human genome pure from alien or artificial corruption. Through the ages he was the first to act when an alien threat descended upon the planet. First it was the Rose Orchid, who Balfon could not fully kill, and had bury its heart in a secluded cavern. And second was the formidable Ravener, against who Balfon was forced to call down the moon in order to drown the parasite with the rising tide. Both threats reemerged, but now he has his flock of faithful. Gifting his inquisitors with his familiars, the cherubs, Balfon now seeks to eradicate the corrupt blood from [[Tidengale]].  
+
+![[Balfon the Silhouette bloody.png]]
