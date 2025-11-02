@@ -1,0 +1,66 @@
+name: Deploy Quartz Site
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: '0 */6 * * *' 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      
+      # 1. Checkout QUARTZ (Repo B) to the root of the workspace (needed for content/ folder)
+      - name: Checkout Quartz (Repo B)
+        uses: actions/checkout@v3
+        with:
+          # Clones the repository where the workflow is running (Repo B)
+          repository: ${{ github.repository }} 
+          # Clones to the root of the workspace (so 'content/' is available)
+          path: . 
+          
+      # 2. Checkout VAULT (Repo A) into a subfolder
+      - name: Checkout Vault (Repo A)
+        uses: actions/checkout@v3
+        with:
+          repository: GrokZGrom/Tidengale
+          token: ${{ secrets.QUARTZ_ACCESS_TO_VAULT }} 
+          # Clones to a SUB-DIRECTORY
+          path: VAULT_REPO_A_CLONE_DIR 
+          
+    # 3. Copy Vault files to Quartz content
+      - name: Copy Vault files to Quartz content
+        run: |
+          # 🚨 CHANGE: This ensures the 'content/' folder is empty.
+          rm -rf content/* # 🚨 FIX: Copy ALL contents (including subfolders like 'Basis') from the clone 
+          # into the 'content/' folder.
+          cp -r VAULT_REPO_A_CLONE_DIR/* content/
+          
+          # 🚨 CRUCIAL CLEANUP: Remove the .obsidian folder from the content directory.
+          # The Quartz builder will often fail or behave unpredictably if it finds 
+          # the Obsidian configuration files.
+          rm -rf content/.obsidian
+
+      # 4. Standard Quartz Build Steps (Now running from the root workspace)
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+        # Working directory is the root: /github/workspace/
+
+      - name: Build Quartz
+        run: npx quartz build
+        # Working directory is the root: /github/workspace/
+
+      # 5. Deploy to GitHub Pages
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          # Output is created in the root 'output' folder
+          publish_dir: output
